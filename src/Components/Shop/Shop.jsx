@@ -8,6 +8,12 @@ const Shop = () => {
 
     const [cart, setCart] = useState([]);
 
+    const handleAddToCart = (product) => {
+        const newCart = [...cart, product];
+        setCart(newCart);
+        addToDb(product.id);
+    }
+    
     useEffect(() => {
         fetch("products.json")
             .then(res => res.json())
@@ -25,16 +31,11 @@ const Shop = () => {
                 addedProducts.quantity = quantity;
                 savedCart.push(addedProducts);
             }
-            console.log(addedProducts);
+            // console.log(addedProducts);
         }
         setCart(savedCart);
     } ,[products])
-
-    const handleAddToCart = (product) => {
-        const newCart = [...cart, product];
-        setCart(newCart);
-        addToDb(product.id);
-    }
+    
 
     return (
         <div className='shop-container'>
